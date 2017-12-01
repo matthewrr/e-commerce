@@ -67,6 +67,9 @@ class Product(models.Model):
     #null not default allows non-values in DB.
     #blank means not required in Django (i.e. admin will be chill)
     
+    def get_absolute_url(self):
+        return "/products/{slug}".format(slug=self.slug)
+    
     def __str__(self):
         return self.title #python 3
     
