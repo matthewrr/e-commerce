@@ -15,8 +15,7 @@ class SearchProductView(ListView):
         query = request.GET.get('q')
         print(query)
         if query is not None:
-            return Product.objects.search(query)
-        return Product.objects.featured()
+            return Product.objects.featured()
         
         '''
         __icontains = field contains this (not case-sensitive)
