@@ -51,12 +51,11 @@ class ProductManager(models.Manager):
     
     def all(self): #also makes call to ProductQuerySet like fcn below
         return self.get_queryset().active()
-        #will exclude objects marked inactive
     
     def featured(self):
         return self.get_queryset().featured()
-    #.featured() == filter(featured=True). The idea is that we can
-    #get_queryset() then pass through ProductQuerySet to filter
+    # .featured() == filter(featured=True). The idea is that we can
+    # get_queryset() then pass through ProductQuerySet to filter
     
     def get_by_id(self, id):
         qs = self.get_queryset().filter(id=id) #Product.objects same-ish
