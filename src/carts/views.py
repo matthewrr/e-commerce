@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
 
+from accounts.forms import LoginForm
+from billing.models import BillingProfile
 from orders.models import Order
 from products.models import Product
 from .models import Cart
@@ -38,12 +40,16 @@ def checkout_home(request):
     else:
         order_obj, new_order_obj = Order.objects.get_or_create(cart=cart_obj)
     user = request.user
+    billing_profile = None
+    login_form = LoginForm()
+    
     if user.is_authenticated():
-        billing_profile = None
+        billing_profile, billing_profile_created = BillingProfile.objects.get_or_create(user=user, email=user.email)
     
     context = {
         'object': order_obj,
-        'billing_profile': billing_profile
+        'billing_profile': billing_profile,
+        'login_form': login_form
     }
     
     return render(request, "carts/checkout.html", context)
