@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 
 from accounts.forms import LoginForm, GuestForm
 from accounts.models import GuestEmail
-from address.forms import AddressForm
+from addresses.forms import AddressForm
 
 from billing.models import BillingProfile
 from orders.models import Order
