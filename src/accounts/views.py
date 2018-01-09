@@ -68,4 +68,5 @@ def register_page(request):
         password = form.cleaned_data.get("password")
         new_user = User.objects.create_user(username, email, password)
         print(new_user)
+        
     return render(request, "accounts/register.html", context)  

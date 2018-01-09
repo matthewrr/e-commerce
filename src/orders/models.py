@@ -31,14 +31,15 @@ class OrderManager(models.Manager):
         if qs.count() == 1:
             obj = qs.first()
         else:
-            obj = self.model.objects.create(billing_profile=billing_profile, cart=cart_obj)
+            obj = self.model.objects.create(
+                billing_profile=billing_profile,
+                cart=cart_obj)
             created = True
         return obj, created
 
 class Order(models.Model):
     billing_profile = models.ForeignKey(BillingProfile, null=True, blank=True)
     order_id = models.CharField(max_length=120, blank=True)
-    # billing_profile = 
     shipping_address = models.ForeignKey(Address, related_name="shipping_address", null=True, blank=True)
     billing_address = models.ForeignKey(Address, related_name="billing_address", null=True, blank=True)
     cart = models.ForeignKey(Cart)
